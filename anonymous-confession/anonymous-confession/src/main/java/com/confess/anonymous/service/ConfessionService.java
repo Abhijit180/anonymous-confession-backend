@@ -11,6 +11,9 @@ public interface ConfessionService {
 
     void submitConfession(ConfessionRequestDTO dto, HttpServletRequest request);
 
+    List<ConfessionResponseDTO> getAllApprovedConfessions();
+
     List<ConfessionResponseDTO> getApprovedConfessions(Category category);
 
 }
+
