@@ -16,12 +16,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/confessions")
 public class ConfessionController {
+
     private final ConfessionService service;
 
     public ConfessionController(ConfessionService service) {
         this.service = service;
     }
 
+    // ✅ POST confession
     @PostMapping
     public ResponseEntity<String> submit(
             @RequestBody @Valid ConfessionRequestDTO dto,
@@ -31,12 +33,17 @@ public class ConfessionController {
         return new ResponseEntity<>("Confession submitted for review", HttpStatus.CREATED);
     }
 
+    // ✅ GET ALL approved confessions
     @GetMapping
-    public ResponseEntity<List<ConfessionResponseDTO>> get(
-            @RequestParam Category category) {
-
-        List<ConfessionResponseDTO> dtos =service.getApprovedConfessions(category);
-        return new ResponseEntity<>(dtos, HttpStatus.OK);
+    public ResponseEntity<List<ConfessionResponseDTO>> getAll() {
+        return ResponseEntity.ok(service.getAllApprovedConfessions());
     }
 
+    // ✅ GET approved confessions by category
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<ConfessionResponseDTO>> getByCategory(
+            @PathVariable Category category) {
+
+        return ResponseEntity.ok(service.getApprovedConfessions(category));
+    }
 }
