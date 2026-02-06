@@ -41,6 +41,14 @@ public class ConfessionServiceImpl implements ConfessionService {
     }
 
     @Override
+    public List<ConfessionResponseDTO> getAllApprovedConfessions() {
+        return repository.findByStatus(Status.APPROVED)
+                .stream()
+                .map(ConfessionMapper::toDTO)
+                .toList();
+    }
+
+    @Override
     public List<ConfessionResponseDTO> getApprovedConfessions(Category category) {
         return repository.findByStatusAndCategory(Status.APPROVED, category)
                 .stream()
@@ -50,3 +58,4 @@ public class ConfessionServiceImpl implements ConfessionService {
 
 
 }
+
