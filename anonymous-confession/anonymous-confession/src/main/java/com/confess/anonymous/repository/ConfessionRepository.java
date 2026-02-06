@@ -10,4 +10,6 @@ import java.util.UUID;
 
 public interface ConfessionRepository extends JpaRepository<Confession, Long> {
     List<Confession> findByStatusAndCategory(Status status, Category category);
+    List<Confession> findByStatus(Status status);
 }
+
