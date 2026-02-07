@@ -36,4 +36,10 @@ public class AdminController {
         repository.save(c);
         return new ResponseEntity<>("Rejected", HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity<?> getAllConfessionsForAdmin() {
+        return ResponseEntity.ok(repository.findAll());
+    }
 }
+
